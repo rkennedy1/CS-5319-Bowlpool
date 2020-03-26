@@ -16,10 +16,6 @@ const InitialState = {
     data: []
 }
 
-const stickyHeader = {
-    position: sticky,
-    top: 0
-}
 
 export class BowlpoolTable extends Component {
     bowlpoolRepo = new bowlpoolRepo()
@@ -36,7 +32,7 @@ export class BowlpoolTable extends Component {
                     Bowlpool
                 </h3>
                 <table className="table">
-                    <thead style={stickyHeader}>
+                    <thead>
                     <tr>
                         <th>Bowls</th>
                         {this.state.data.players !== undefined &&

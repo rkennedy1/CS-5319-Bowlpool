@@ -1,1 +1,1 @@
-.tableFixHead thead th { position: sticky; top: 0; }
+.tableFixHead thead th { position: fixed; top: 0; width:100%;}
