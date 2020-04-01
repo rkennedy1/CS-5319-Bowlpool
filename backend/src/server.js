@@ -2,8 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
-const ep = require("excelParser.js")
-const gd = require("gameData.js")
+const gd = require("./gameData.js")
 
 const config = {
   name: 'sample-express-app',
@@ -19,7 +18,6 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(ExpressAPILogMiddleware(logger, { request: true }));
 
-let games = ep.parseExcelFile('resources/bowlpool.xlsx')
 let currentGameData = [];
 let bowlData = function(bowlGames, players) {
   this.bowlGames = bowlGames;
@@ -27,14 +25,13 @@ let bowlData = function(bowlGames, players) {
 }
 
 let gameData = gd.createGameData().then((result) => {
-  console.log(result);
   currentGameData = result;
 })
 
 app.get('/', (req, res) => {
   let gameData = gd.createGameData().then((result) => {
     currentGameData = result;
-    res.send(new bowlData(currentGameData, players))
+    res.send(new bowlData(currentGameData, gd.getPlayers()))
   })
 });
 
