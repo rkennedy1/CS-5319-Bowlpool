@@ -1,14 +1,16 @@
-var player = function(name, picks) {
+let exports = {};
+
+let player = function(name, picks) {
     this.name = name;
     this.picks = picks;
 }
 
-var pick = function(bowlID, homePick) {
+let pick = function(bowlID, homePick) {
     this.bowlID = bowlID;
     this.homePick = homePick;
 }
 
-var players = [
+let players = [
     new player("AJK", []),
     new player("MAK", []),
     new player("HR", []),
@@ -25,7 +27,7 @@ var players = [
     new player("KGK", [])
 ]
 
-export function getLine(file) {
+exports.getLine = function (file) {
     if (file.Line) {
         return file.Line;
     } else {
@@ -33,8 +35,8 @@ export function getLine(file) {
     }
 }
 
-export const createGameData = async () => {
-    var bowlGames = [];
+exports.createGameData = async () => {
+    let bowlGames = [];
     console.log("data");
     let gameDataJSON = await getGameData().then((result) => {
         for (var i = 0; i < result.length; i++) {
@@ -47,26 +49,27 @@ export const createGameData = async () => {
       bowlGames.push(gameData)
     }
     */
+    console.log(gameDataJSON)
     return await Promise.all(bowlGames);
 }
 
-const getGameDataForID = async (gameID, homeLine, awayLine) => {
-    var url = "https://api.collegefootballdata.com/games?year=2019&seasonType=regular&id=";
+exports.getGameDataForID = async (gameID, homeLine, awayLine) => {
+    let url = "https://api.collegefootballdata.com/games?year=2019&seasonType=regular&id=";
     const response = await fetch(url + gameID)
     const myJSON = await response.json();
     return await new bowlGame(myJSON[0].id, myJSON[0].start_date, myJSON[0].home_team, myJSON[0].away_team, homeLine, awayLine, myJSON[0].home_points, myJSON[0].away_points)
 }
 
-export const getGameData = async  () => {
-    var url = "https://api.collegefootballdata.com/games?year=2019&seasonType=postseason"
+exports.getGameData = async  () => {
+    let url = "https://api.collegefootballdata.com/games?year=2019&seasonType=postseason"
     const response = await fetch(url)
     const myJSON = await response.json();
     return await myJSON;
 }
 
-export function setPicksForGame(file, isHome) {
+exports.setPicksForGame = function(file, isHome) {
     console.log(file.id);
-    for (var j = 0; j < players.length; j++) {
+    for (let j = 0; j < players.length; j++) {
         if (file[players[j].name] == 'X'&& !players[j].picks.find(function(element) {
             if (element.bowlID == file.id) {
                 return true
@@ -83,3 +86,5 @@ export function setPicksForGame(file, isHome) {
         }
     }
 }
+
+module.exports = exports;

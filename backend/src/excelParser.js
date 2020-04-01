@@ -1,19 +1,20 @@
-const XLSX = require('xlsx');
+const XLSX = require('xlsx')
 const gd = require("gameData")
 
-var bowlgameData = function(bowlId, homeTeamLine, awayTeamLine) {
+var exports = {};
+exports.bowlgameData = function(bowlId, homeTeamLine, awayTeamLine) {
     this.bowlId = bowlId
     this.homeTeamLine = homeTeamLine;
     this.awayTeamLine = awayTeamLine;
 }
 
-function readExcelFile (path) {
+exports.readExcelFile = function(path) {
     const workbook = XLSX.readFile(path);
     const sheet_name_list = workbook.SheetNames;
     return XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
 }
 
-export function parseExcelFile(path) {
+exports.parseExcelFile = function(path) {
     var file = readExcelFile(path)
     var bowlgames = [];
     var awayLine, homeLine;
@@ -33,7 +34,4 @@ export function parseExcelFile(path) {
     return bowlgames;
 }
 
-module.exports = {
-    readExcelFile: readExcelFile(path),
-    parseExcelFile: parseExcelFile(path)
-};
+module.exports = exports

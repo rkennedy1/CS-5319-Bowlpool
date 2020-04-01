@@ -19,13 +19,12 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(ExpressAPILogMiddleware(logger, { request: true }));
 
-var games = ep.parseExcelFile('resources/bowlpool.xlsx')
-var currentGameData = [];
-var bowlData = function(bowlGames, players) {
+let games = ep.parseExcelFile('resources/bowlpool.xlsx')
+let currentGameData = [];
+let bowlData = function(bowlGames, players) {
   this.bowlGames = bowlGames;
   this.players = players;
 }
-
 
 let gameData = gd.createGameData().then((result) => {
   console.log(result);
