@@ -1,5 +1,4 @@
 const XLSX = require('xlsx')
-const gd = require("./gameData")
 
 let functions = {};
 
@@ -44,19 +43,19 @@ getLine = function (file) {
     }
 }
 
-setPicksForGame = function(file, isHome) {
+setPicksForGame = function(game, isHome) {
     for (let j = 0; j < players.length; j++) {
-        if (file[players[j].name] == 'X'&& !players[j].picks.find(function(element) {
-            if (element.bowlID === file.id) {
+        if (game[players[j].name] == 'X'&& !players[j].picks.find(function(element) {
+            if (element.bowlID === game.id) {
                 return true
             } else {
                 return false
             }
         })) {
             if (isHome) {
-                players[j].picks.push(new pick(file.id, true))
+                players[j].picks.push(new pick(game.id, true))
             } else {
-                players[j].picks.push(new pick(file.id, false))
+                players[j].picks.push(new pick(game.id, false))
             }
         }
     }
@@ -74,7 +73,7 @@ functions.parseExcelFile = function(path) {
     }
     let file = readExcelFile(path)
     let bowlgames = [];
-    let awayLine, homeLine;
+    let awayLine, homeLine = 0;
 
     for (let i = 0; i < file.length; i++) {
         if (file[i].venue === "Home") {

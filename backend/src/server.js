@@ -29,10 +29,11 @@ let gameData = gd.createGameData().then((result) => {
 })
 
 app.get('/', (req, res) => {
-  let gameData = gd.createGameData().then((result) => {
+  res.send(new bowlData(currentGameData, gd.getPlayers()))
+  /*let gameData = gd.createGameData().then((result) => {
     currentGameData = result;
     res.send(new bowlData(currentGameData, gd.getPlayers()))
-  })
+  })*/
 });
 
 

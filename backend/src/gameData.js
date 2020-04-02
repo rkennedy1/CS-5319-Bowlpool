@@ -17,9 +17,13 @@ let bowlGame = function(bowlID, date, homeTeam, awayTeam, homeTeamLine, awayTeam
 functions.createGameData = async () => {
     let bowlGames = [];
     let games = ep.parseExcelFile('resources/bowlpool.xlsx')
+    console.log(games.length)
     let gameDataJSON = await getGameData().then((result) => {
-        for (let i = 0; i < result.length; i++) {
-            bowlGames.push(new bowlGame(result[i].id, result[i].start_date, result[i].home_team, result[i].away_team, games[i].homeTeamLine, games[i].awayTeamLine, result[i].home_points, result[i].away_points))
+        console.log(result.length)
+        for (let i = 0; i < (result.length && games.length); i++) {
+            //console.log(result[i].homeTeamLine + " " + result[i].awayTeamLine)
+            //if (games[i].homeTeamLine && games[i].awayTeamLine)
+                bowlGames.push(new bowlGame(result[i].id, result[i].start_date, result[i].home_team, result[i].away_team, games[i].homeTeamLine, games[i].awayTeamLine, result[i].home_points, result[i].away_points))
         }
     }).catch((error) => {
         console.error(error)
@@ -37,12 +41,12 @@ functions.getPlayers = function () {
     return ep.getPlayers()
 }
 
-getGameDataForID = async (gameID, homeLine, awayLine) => {
+/*getGameDataForID = async (gameID, homeLine, awayLine) => {
     let url = "https://api.collegefootballdata.com/games?year=2019&seasonType=regular&id=";
     const response = await fetch(url + gameID)
     const myJSON = await response.json();
     return await new bowlGame(myJSON[0].id, myJSON[0].start_date, myJSON[0].home_team, myJSON[0].away_team, homeLine, awayLine, myJSON[0].home_points, myJSON[0].away_points)
-}
+}*/
 
 getGameData = async  () => {
     let url = "https://api.collegefootballdata.com/games?year=2019&seasonType=postseason"
