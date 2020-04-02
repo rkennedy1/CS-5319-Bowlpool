@@ -7,8 +7,8 @@ let player = function(name, picks) {
     this.picks = picks;
 }
 
-let pick = function(bowlID, homePick) {
-    this.bowlID = bowlID;
+let pick = function(id, homePick) {
+    this.id = id;
     this.homePick = homePick;
 }
 
@@ -46,7 +46,7 @@ getLine = function (file) {
 setPicksForGame = function(game, isHome) {
     for (let j = 0; j < players.length; j++) {
         if (game[players[j].name] == 'X'&& !players[j].picks.find(function(element) {
-            if (element.bowlID === game.id) {
+            if (element.id === game.id) {
                 return true
             } else {
                 return false
@@ -62,11 +62,12 @@ setPicksForGame = function(game, isHome) {
 }
 
 functions.getPlayers = function () {
-    console.log("total players: " + players.length)
-    for (let i = 0; i < players.length; i++) {
-        console.log("p"+(i+1)+": " + players[i].picks.length)
-    }
-    console.log(players[0].picks[2].bowlID)
+    // console.log("total players: " + players.length)
+    // for (let i = 0; i < players.length; i++) {
+    //     console.log("p"+(i+1)+": " + players[i].picks.length)
+    // }
+    // console.log("p1-pick2: "+players[0].picks[2].id)
+    // console.log("p2-pick2: "+players[1].picks[2].id)
     return players;
 }
 
@@ -79,7 +80,6 @@ functions.parseExcelFile = function(path) {
     let file = readExcelFile(path)
     let bowlgames = [];
     let awayLine, homeLine = 0;
-
     for (let i = 0; i < file.length; i++) {
         if (file[i].venue === "Home") {
             homeLine = getLine(file[i])

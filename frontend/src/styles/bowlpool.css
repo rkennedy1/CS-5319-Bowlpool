@@ -1,1 +1,14 @@
 .tableFixHead thead th { position: fixed; top: 0; width:100%;}
+
+#away {
+    border-bottom: 2pt solid black;
+    margin-bottom: 10pt;
+}
+
+td {
+    border-left: 1pt solid black;
+}
+
+#footer {
+    position: absolute;
+}
