@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
 const gd = require("./gameData.js")
+const ep = require("./excelParser.js")
 
 const config = {
   name: 'sample-express-app',
@@ -28,6 +29,10 @@ let gameData = gd.createGameData().then((result) => {
   currentGameData = result;
 })
 
+app.get('/ec', (req, res) => {
+  res.send(ep.parseExcelFile('resources/bowlpool.xlsx'))
+});
+
 app.get('/', (req, res) => {
   res.send(new bowlData(currentGameData, gd.getPlayers()))
   /*let gameData = gd.createGameData().then((result) => {
@@ -35,6 +40,7 @@ app.get('/', (req, res) => {
     res.send(new bowlData(currentGameData, gd.getPlayers()))
   })*/
 });
+
 
 
 //connecting the express object to listen on a particular port as defined in the config object.

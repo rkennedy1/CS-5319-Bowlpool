@@ -29,8 +29,8 @@ let players = [
     new player("KGK", [])
 ]
 
-bowlgameData = function (bowlId, homeTeamLine, awayTeamLine) {
-    this.bowlId = bowlId
+bowlgameData = function (id, homeTeamLine, awayTeamLine) {
+    this.id = id
     this.homeTeamLine = homeTeamLine;
     this.awayTeamLine = awayTeamLine;
 }
@@ -62,6 +62,11 @@ setPicksForGame = function(game, isHome) {
 }
 
 functions.getPlayers = function () {
+    console.log("total players: " + players.length)
+    for (let i = 0; i < players.length; i++) {
+        console.log("p"+(i+1)+": " + players[i].picks.length)
+    }
+    console.log(players[0].picks[2].bowlID)
     return players;
 }
 

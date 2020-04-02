@@ -17,12 +17,11 @@ let bowlGame = function(bowlID, date, homeTeam, awayTeam, homeTeamLine, awayTeam
 functions.createGameData = async () => {
     let bowlGames = [];
     let games = ep.parseExcelFile('resources/bowlpool.xlsx')
-    console.log(games.length)
     let gameDataJSON = await getGameData().then((result) => {
-        console.log(result.length)
+        result.pop(); //Removes Championship game from api data since the game is not on excel sheet
         for (let i = 0; i < (result.length && games.length); i++) {
+            console.log(games[i].id + " g:r " + result[i].id)
             //console.log(result[i].homeTeamLine + " " + result[i].awayTeamLine)
-            //if (games[i].homeTeamLine && games[i].awayTeamLine)
                 bowlGames.push(new bowlGame(result[i].id, result[i].start_date, result[i].home_team, result[i].away_team, games[i].homeTeamLine, games[i].awayTeamLine, result[i].home_points, result[i].away_points))
         }
     }).catch((error) => {
