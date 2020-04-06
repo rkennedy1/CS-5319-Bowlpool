@@ -34,10 +34,11 @@ export class BowlpoolTable extends Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th className="sticky-top bg-light">Bowls</th>
+                            <th className="sticky-top bg-light" id="header">Teams</th>
+                            <th className="sticky-top bg-light" id="header">Line</th>
                             {this.state.data.players !== undefined &&
                             this.state.data.players.map((p, i) => (
-                                <th key={i} className="sticky-top bg-light">{p.name}</th>
+                                <th key={i} className="sticky-top bg-light" id="header">{p.name}</th>
                             ))}
                         </tr>
                     </thead>
@@ -46,7 +47,10 @@ export class BowlpoolTable extends Component {
                         this.state.data.bowlGames.map((b, i) => (
                             <>
                                 <tr key={i} className={(b.homeScore > 0 && b.awayScore > 0) && checkIfHomeWon(b.homeScore, b.awayScore, b.homeTeamLine, b.awayTeamLine) ? "table-success" : ""}>
-                                 <th scope="row" className="">Home: {b.homeTeam}</th>
+                                 <th scope="row" className="">Home: {(b.homeScore !== 0) ? `${b.homeTeam} - ${b.homeScore}` : b.homeTeam}</th>
+                                    <th>
+                                        {(b.homeTeamLine !== 0) ? b.homeTeamLine : "+0"}
+                                    </th>
                                     {this.state.data.players !== undefined &&
                                     this.state.data.players.map((p, j) => (
                                         <td key={j} className="">
@@ -56,7 +60,10 @@ export class BowlpoolTable extends Component {
                                     ))}
                                     </tr>
                                 <tr key={i} className={(b.homeScore > 0 && b.awayScore > 0) && !checkIfHomeWon(b.homeScore, b.awayScore, b.homeTeamLine, b.awayTeamLine) ? "table-success" : ""} >
-                                        <th scope="row" id="away" className="">Away: {b.awayTeam}</th>
+                                        <th scope="row" id="away" className="">Away: {(b.awayScore !== 0) ? `${b.awayTeam} - ${b.awayScore}` : b.awayTeam}</th>
+                                        <th id="away">
+                                            {(b.awayTeamLine !== 0) ? b.awayTeamLine : "+0"}
+                                        </th>
                                         {this.state.data.players !== undefined &&
                                         this.state.data.players.map((p, j) => (
                                             <td key={j} id="away" className="">
@@ -70,10 +77,11 @@ export class BowlpoolTable extends Component {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th id="footer">Total</th>
+                            <th className="footer">Total</th>
+                            <th className="footer"></th>
                             {this.state.data.players !== undefined &&
                             this.state.data.players.map((p, i) => (
-                                <th key={i} id="" className="bg-light">{p.name}</th>
+                                <th key={i} id="footCols" className="bg-light footer">{p.name}</th>
                             ))}
                         </tr>
                     </tfoot>
