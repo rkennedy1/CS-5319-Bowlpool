@@ -1,12 +1,9 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
 const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
-const gd = require("./gameData.js")
-const ep = require("./excelParser.js")
+const gd = require("../model/gameData.js")
 
 const config = {
-  name: 'sample-express-app',
+  name: 'sample-express-view',
   port: 3000,
   host: '0.0.0.0',
 };
@@ -14,10 +11,6 @@ const config = {
 const app = express();
 
 const logger = log({ console: true, file: false, label: config.name });
-
-app.use(bodyParser.json());
-app.use(cors());
-app.use(ExpressAPILogMiddleware(logger, { request: true }));
 
 let currentGameData = [];
 let bowlData = function(bowlGames, players) {
@@ -29,9 +22,6 @@ let gameData = gd.createGameData().then((result) => {
   currentGameData = result;
 })
 
-app.get('/ec', (req, res) => {
-  res.send(ep.parseExcelFile('resources/bowlpool.xlsx'))
-});
 
 app.get('/', (req, res) => {
   res.send(new bowlData(currentGameData, gd.getPlayers()))

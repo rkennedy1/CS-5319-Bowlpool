@@ -5,9 +5,9 @@ services:
   api:
     image: node:11
     volumes:
-      - ./src:/usr/src/app
-      - /usr/src/app/node_modules
-    working_dir: /usr/src/app
+      - ./src:/usr/src/view
+      - /usr/src/view/node_modules
+    working_dir: /usr/src/view
     command: bash -c "npm install && npm run dev"
     ports:
       - 3000:3000

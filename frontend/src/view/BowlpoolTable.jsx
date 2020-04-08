@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {bowlpoolRepo} from "../api/bowlpoolRepo";
+import {bowlpoolRepo} from "../controller/bowlpoolRepo";
 import '../styles/bowlpool.css'
 
 function checkIfHomeWon(home, away, hLine, aLine) {
