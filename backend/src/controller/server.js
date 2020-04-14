@@ -1,6 +1,8 @@
 const express = require('express');
 const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
 const gd = require("../model/gameData.js")
+const cors = require('cors');
+
 
 const config = {
   name: 'sample-express-view',
@@ -9,6 +11,8 @@ const config = {
 };
 
 const app = express();
+app.use(cors());
+
 
 const logger = log({ console: true, file: false, label: config.name });
 
@@ -24,7 +28,7 @@ let gameData = gd.createGameData().then((result) => {
 
 
 app.get('/', (req, res) => {
-  res.send(new bowlData(currentGameData, gd.getPlayers()))
+  res.send(new bowlData(currentGameData, gd.getPlayers(currentGameData)))
   /*let gameData = gd.createGameData().then((result) => {
     currentGameData = result;
     res.send(new bowlData(currentGameData, gd.getPlayers()))

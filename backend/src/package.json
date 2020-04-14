@@ -16,7 +16,8 @@
     "express": "^4.17.1",
     "node-fetch": "^2.6.0",
     "read-excel-file": "^4.0.5",
-    "xlsx": "^0.15.4"
+    "xlsx": "^0.15.4",
+    "cors": "latest"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"

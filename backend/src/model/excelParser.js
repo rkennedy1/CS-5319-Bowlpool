@@ -5,6 +5,7 @@ let functions = {};
 let player = function(name, picks) {
     this.name = name;
     this.picks = picks;
+    this.points = 0
 }
 
 let pick = function(id, homePick) {

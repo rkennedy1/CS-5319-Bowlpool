@@ -1,3 +1,4 @@
+
 const fetch = require("node-fetch");
 const ep = require("./excelParser.js")
 
@@ -12,6 +13,14 @@ let bowlGame = function(bowlID, date, homeTeam, awayTeam, homeTeamLine, awayTeam
     this.awayTeamLine = awayTeamLine;
     this.homeScore = homeScore;
     this.awayScore = awayScore;
+}
+
+let checkIfHomeWon = function(home, away, hLine, aLine) {
+    if (home !== 0 && away !== 0) {
+        return (home+parseFloat(hLine)) > (away+parseFloat(aLine))
+    } else{
+        return false
+    }
 }
 
 functions.createGameData = async () => {
@@ -34,8 +43,27 @@ functions.createGameData = async () => {
     return await Promise.all(bowlGames);
 }
 
-functions.getPlayers = function () {
-    return ep.getPlayers()
+let setScores  = function(players, games) {
+    for (let i = 0; i < players.length; i++) {
+        players[i].points = 0
+    }
+    for (let i = 0; i < games.length; i++) {
+        for (let j = 0; j < players.length; j++) {
+            if (checkIfHomeWon(games[i].homeScore, games[i].awayScore, games[i].homeTeamLine, games[i].awayTeamLine)) {
+                if (players[j].picks[i].homePick)
+                    players[j].points++
+            } else {
+                if (!players[j].picks[i].homePick)
+                    players[j].points++
+            }
+        }
+    }
+    return players
+}
+
+functions.getPlayers = function (data) {
+
+    return setScores(ep.getPlayers(), data)
 }
 
 /*getGameDataForID = async (gameID, homeLine, awayLine) => {

@@ -17,15 +17,19 @@ const InitialState = {
 }
 
 
+
 export class BowlpoolTable extends Component {
     bowlpoolRepo = new bowlpoolRepo()
+
+
 
     state = {
         data: []
     };
 
-
     render() {
+
+
         return (
             <div className="container ">
                 <h3 className="m-2">
@@ -67,8 +71,8 @@ export class BowlpoolTable extends Component {
                                         {this.state.data.players !== undefined &&
                                         this.state.data.players.map((p, j) => (
                                             <td key={j} id="away" className="">
-                                                {!p.picks[i].homePick &&
-                                                <>X</>}
+                                                {(!p.picks[i].homePick &&
+                                                <>X</>)}
                                             </td>
                                         ))}
                                 </tr>
@@ -81,7 +85,7 @@ export class BowlpoolTable extends Component {
                             <th className="footer"></th>
                             {this.state.data.players !== undefined &&
                             this.state.data.players.map((p, i) => (
-                                <th key={i} id="footCols" className="bg-light footer">{p.name}</th>
+                                <th key={i} id="footCols" className="bg-light footer">{p.points}</th>
                             ))}
                         </tr>
                     </tfoot>
@@ -89,6 +93,7 @@ export class BowlpoolTable extends Component {
             </div>
         )
     };
+
     componentDidMount() {
         this.state = localStorage.getItem("appState") ? JSON.parse(localStorage.getItem("appState")) : InitialState;
         this.bowlpoolRepo.getData()
