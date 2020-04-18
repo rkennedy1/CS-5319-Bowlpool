@@ -34,12 +34,6 @@ functions.createGameData = async () => {
     }).catch((error) => {
         console.error(error)
     });
-    /*
-    for(var i = 0; i < games.length; i++) {
-      const gameData = await getGameDataForID(games[i].bowlId, games[i].homeTeamLine, games[i].awayTeamLine)
-      bowlGames.push(gameData)
-    }
-    */
     return await Promise.all(bowlGames);
 }
 
@@ -65,13 +59,6 @@ functions.getPlayers = function (data) {
 
     return setScores(ep.getPlayers(), data)
 }
-
-/*getGameDataForID = async (gameID, homeLine, awayLine) => {
-    let url = "https://api.collegefootballdata.com/games?year=2019&seasonType=regular&id=";
-    const response = await fetch(url + gameID)
-    const myJSON = await response.json();
-    return await new bowlGame(myJSON[0].id, myJSON[0].start_date, myJSON[0].home_team, myJSON[0].away_team, homeLine, awayLine, myJSON[0].home_points, myJSON[0].away_points)
-}*/
 
 getGameData = async  () => {
     let url = "https://api.collegefootballdata.com/games?year=2019&seasonType=postseason"

@@ -63,12 +63,6 @@ setPicksForGame = function(game, isHome) {
 }
 
 functions.getPlayers = function () {
-    // console.log("total players: " + players.length)
-    // for (let i = 0; i < players.length; i++) {
-    //     console.log("p"+(i+1)+": " + players[i].picks.length)
-    // }
-    // console.log("p1-pick2: "+players[0].picks[2].id)
-    // console.log("p2-pick2: "+players[1].picks[2].id)
     return players;
 }
 

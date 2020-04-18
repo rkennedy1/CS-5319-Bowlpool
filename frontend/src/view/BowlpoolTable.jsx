@@ -16,8 +16,6 @@ const InitialState = {
     data: []
 }
 
-
-
 export class BowlpoolTable extends Component {
     bowlpoolRepo = new bowlpoolRepo()
 
