@@ -36,7 +36,7 @@ export class BowlpoolTable extends Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th className="sticky-top bg-light" id="header">Teams</th>
+                            <th className="sticky-top bg-light" id="header">Matchups</th>
                             <th className="sticky-top bg-light" id="header">Line</th>
                             {this.state.data.players !== undefined &&
                             this.state.data.players.map((p, i) => (
