@@ -1,4 +1,4 @@
-1. Verify you have Node.JS installed by running the command 'node -v' from cmd or terminal or Install Node.JS from https://nodejs.org/en/download/
+1. Verify you have at least version 12 of Node.JS installed by running the command 'node -v' from cmd or terminal or Install Node.JS from https://nodejs.org/en/download/
 	i. Once installed verify by running node -v
 2. Verify you have Docker installed/running by running the commnad 'docker ps'
 	i. If needed install Docker from https://docs.docker.com/get-docker/
