@@ -1,5 +1,5 @@
 
-const fetch = require("node-fetch");
+const fetch = require('node-fetch')
 const ep = require("./excelParser.js")
 
 let functions = {};
@@ -62,7 +62,12 @@ functions.getPlayers = function (data) {
 
 getGameData = async  () => {
     let url = "https://api.collegefootballdata.com/games?year=2019&seasonType=postseason"
-    const response = await fetch(url)
+    const response = await fetch(url, {
+      method: 'get',
+      headers: {
+        'Authorization': `Bearer 1/L/DhvSi4BuxRMHMvpFCMl0MEZhjUYC14MaGwsYa4pgps8Y/cSi5zTlTry5KSPN`
+      },
+    })
     const myJSON = await response.json();
     return await myJSON;
 }
