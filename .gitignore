@@ -1,2 +1,4 @@
 backend/src/node_modules/
 frontend/node_modules/
+backend/src/package-lock.json
+backend/src/log/*
